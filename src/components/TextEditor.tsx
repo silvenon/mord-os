@@ -13,6 +13,7 @@ import { useStore } from '@nanostores/react'
 import { PlusCircleIcon } from '@heroicons/react/outline'
 
 import Window from './Window'
+import Button from './Button'
 import {
   textFiles,
   createTextFile,
@@ -78,13 +79,15 @@ export default function TextEditor() {
               path="*"
               element={
                 <div className="p-1.5">
-                  <Link
+                  <Button
+                    as={Link}
+                    variant="primary"
                     to="/text-editor/new"
-                    className="button-primary flex gap-1 justify-center"
+                    className="flex gap-1 justify-center"
                   >
                     <PlusCircleIcon className="w-5 h-5" />
                     <span>New</span>
-                  </Link>
+                  </Button>
                 </div>
               }
             />
@@ -176,12 +179,12 @@ function TextEditorForm({
       />
       {touched ? (
         <div className="flex items-center justify-between p-2">
-          <Link to="/text-editor" className="button-secondary">
+          <Button as={Link} variant="secondary" to="/text-editor">
             Cancel
-          </Link>
-          <button type="submit" className="button-primary">
+          </Button>
+          <Button variant="primary" type="submit">
             Save
-          </button>
+          </Button>
         </div>
       ) : null}
     </form>
