@@ -1,4 +1,7 @@
 node_modules
 .parcel-cache
 dist
+# I have zero idea why ESLint is trying to parse HTML
+# and Markdown files, maybe it's just on my machine
 *.html
+*.md
