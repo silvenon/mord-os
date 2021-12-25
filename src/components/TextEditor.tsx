@@ -44,7 +44,7 @@ export default function TextEditor() {
                 <Route
                   path="new"
                   element={
-                    <li>
+                    <li className="p-1">
                       <input
                         ref={newFilePathRef}
                         type="text"
@@ -62,8 +62,8 @@ export default function TextEditor() {
                   <NavLink
                     to={`/text-editor/edit/${file.path}`}
                     className={({ isActive }) =>
-                      `block px-2 py-1 text-gray-500 hover:text-pink-700 hover:bg-pink-100 ${
-                        isActive ? 'text-pink-700 font-medium' : ''
+                      `block px-2 py-1 hover:text-pink-700 hover:bg-pink-100 ${
+                        isActive ? 'text-pink-700 font-medium' : 'text-gray-500'
                       }`
                     }
                   >

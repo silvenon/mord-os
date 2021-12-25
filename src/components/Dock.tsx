@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import {
   DocumentTextIcon,
-  CameraIcon,
+  // CameraIcon,
   PhotographIcon,
 } from '@heroicons/react/solid'
 
@@ -11,11 +11,12 @@ const applications = [
     path: '/text-editor',
     Icon: DocumentTextIcon,
   },
-  {
-    name: 'Camera',
-    path: '/camera',
-    Icon: CameraIcon,
-  },
+  // not sure how this app would work in the context of the Photos app
+  // {
+  //   name: 'Camera',
+  //   path: '/camera',
+  //   Icon: CameraIcon,
+  // },
   {
     name: 'Photos',
     path: '/photos',
@@ -25,7 +26,7 @@ const applications = [
 
 export default function Dock() {
   return (
-    <div className="flex items-center justify-center gap-3 overflow-hidden">
+    <div className="flex items-center justify-center gap-3 overflow-y-hidden">
       {applications.map(({ name, path, Icon }) => (
         <NavLink
           key={name}

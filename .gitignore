@@ -5,9 +5,11 @@
 node_modules
 *.log
 
-# Parcel
-.parcel-cache
+# Vite
 dist
 
 # Tailwind
 style.css
+
+# environment variables
+.env.local

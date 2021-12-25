@@ -1,10 +1,10 @@
-const wallpaperUrl = new URL('../images/wallpaper.jpg', import.meta.url)
+const wallpaperUrl = new URL('../images/wallpaper.jpg', import.meta.url).href
 
 export default function Wallpaper() {
   return (
-    <figure className="absolute inset-0 bg-[#fccbbc]">
+    <figure className="absolute inset-0">
       <img
-        src={wallpaperUrl.href}
+        src={wallpaperUrl}
         alt="wallpaper"
         className="h-full w-full object-cover"
       />
