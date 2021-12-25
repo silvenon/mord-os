@@ -26,3 +26,9 @@ Populate this file with your credentials, for example:
 VITE_EMAIL=me@mordos.com
 VITE_PASSWORD=mypass
 ```
+
+Run the app with:
+
+```
+npm run dev
+```
