@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "prepare": "simple-git-hooks",
     "css": "tailwindcss --output style.css",
     "dev": "npm run css && npm-run-all --parallel dev:*",
     "dev:css": "npm run css -- --watch",
