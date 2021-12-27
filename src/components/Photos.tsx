@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useParams } from 'react-router-dom'
 import Window from './Window'
+import useFetch from '../hooks/useFetch'
 
 interface Album {
   userId: number
   id: number
   title: string
-  cover?: string
-  thumbnailUrl?: string
 }
 
 interface Photo {
@@ -19,45 +17,33 @@ interface Photo {
 }
 
 export default function Camera() {
-  const [albums, setAlbums] = useState<Album[]>([])
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/albums')
-      .then((res) => res.json())
-      .then((fetchedAlbums: Album[]) => {
-        setAlbums(fetchedAlbums)
-        fetchedAlbums.forEach((album) => {
-          fetch(
-            `https://jsonplaceholder.typicode.com/photos?albumId=${album.id}`,
-          )
-            .then((res) => res.json())
-            .then((fetchedPhotos: Photo[]) =>
-              setAlbums((prev) =>
-                prev.map((a) =>
-                  a.id === album.id
-                    ? { ...a, thumbnailUrl: fetchedPhotos[0].thumbnailUrl }
-                    : a,
-                ),
-              ),
-            )
-        })
-      })
-  }, [])
+  const { data: albums } = useFetch<Album[]>(
+    'https://jsonplaceholder.typicode.com/albums',
+  )
+  const { data: photos } = useFetch<Photo[]>(
+    'https://jsonplaceholder.typicode.com/photos',
+  )
 
   return (
-    <Window title="Photos">
+    <Window title="Photos" rootPathname="/photos">
       <div className="h-full overflow-y-auto p-2 ">
         <Routes>
           <Route
             path="/"
             element={
               <div className="grid gap-2 grid-cols-4">
-                {albums.map((album) => (
+                {albums?.map((album) => (
                   <Link
                     key={album.id}
                     to={`/photos/albums/${album.id}`}
                     className="aspect-square bg-cover rounded-md opacity-90 grayscale-[25%] transition hover:opacity-100 hover:grayscale-[0%] hover:ring-2 hover:ring-offset-2 hover:ring-pink-500"
-                    style={{ backgroundImage: `url(${album.thumbnailUrl})` }}
+                    style={{
+                      backgroundImage: `url(${
+                        photos?.find((photo) => {
+                          return photo.albumId === album.id
+                        })?.thumbnailUrl
+                      })`,
+                    }}
                     aria-label={album.title}
                   />
                 ))}
@@ -74,7 +60,9 @@ export default function Camera() {
 
 function Album() {
   const { albumId } = useParams()
-  const [photos, setPhotos] = useState<Photo[]>([])
+  const { data: photos } = useFetch<Photo[]>(
+    `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`,
+  )
 
   if (!albumId) {
     return (
@@ -82,15 +70,9 @@ function Album() {
     )
   }
 
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
-      .then((res) => res.json())
-      .then((fetchedPhotos: Photo[]) => setPhotos(fetchedPhotos))
-  }, [albumId])
-
   return (
     <div className="grid grid-cols-6 gap-2">
-      {photos.map((photo) => (
+      {photos?.map((photo) => (
         <Link
           key={photo.id}
           to={`/photos/${photo.id}`}
@@ -105,19 +87,15 @@ function Album() {
 
 function Photo() {
   const { photoId } = useParams()
-  const [photo, setPhoto] = useState<Photo>()
+  const { data: photo } = useFetch<Photo>(
+    `https://jsonplaceholder.typicode.com/photos/${photoId}`,
+  )
 
   if (!photoId) {
     return (
       <div className="h-full grid place-content-center">Photo not found</div>
     )
   }
-
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/photos/${photoId}`)
-      .then((res) => res.json())
-      .then((fetchedPhoto: Photo) => setPhoto(fetchedPhoto))
-  }, [photoId])
 
   return photo ? (
     <img
