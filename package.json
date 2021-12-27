@@ -6,7 +6,7 @@
     "dev": "npm run css && npm-run-all --parallel dev:*",
     "dev:css": "npm run css -- --watch",
     "dev:vite": "vite",
-    "build": "npm-run-all --serial build:css build:parcel",
+    "build": "npm-run-all --serial build:css build:vite",
     "build:css": "npm run css -- --minify",
     "build:vite": "vite build",
     "start": "vite preview"
