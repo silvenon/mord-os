@@ -55,7 +55,7 @@ export default function Camera() {
                 {albums.map((album) => (
                   <Link
                     key={album.id}
-                    to={`/photos/album/${album.id}`}
+                    to={`/photos/albums/${album.id}`}
                     className="aspect-square bg-cover rounded-md opacity-90 grayscale-[25%] transition hover:opacity-100 hover:grayscale-[0%] hover:ring-2 hover:ring-offset-2 hover:ring-pink-500"
                     style={{ backgroundImage: `url(${album.thumbnailUrl})` }}
                     aria-label={album.title}
@@ -64,8 +64,8 @@ export default function Camera() {
               </div>
             }
           />
-          <Route path="album/:albumId" element={<Album />} />
-          <Route path="photo/:photoId" element={<Photo />} />
+          <Route path="albums/:albumId" element={<Album />} />
+          <Route path=":photoId" element={<Photo />} />
         </Routes>
       </div>
     </Window>
@@ -93,7 +93,7 @@ function Album() {
       {photos.map((photo) => (
         <Link
           key={photo.id}
-          to={`/photos/photo/${photo.id}`}
+          to={`/photos/${photo.id}`}
           className="aspect-square bg-cover rounded-md opacity-90 grayscale-[25%] transition hover:opacity-100 hover:grayscale-[0%] hover:ring-2 hover:ring-offset-2 hover:ring-pink-500"
           style={{ backgroundImage: `url(${photo.thumbnailUrl})` }}
           aria-label={photo.title}
