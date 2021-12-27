@@ -4,6 +4,7 @@ import Wallpaper from './components/Wallpaper'
 import Login from './components/Login'
 import TextEditor from './components/TextEditor'
 import Photos from './components/Photos'
+import Reader from './components/Reader'
 import NotFound from './components/NotFound'
 import Dock from './components/Dock'
 
@@ -21,6 +22,7 @@ export default function App() {
               <Route path="/" element={<div />} />
               <Route path="text-editor/*" element={<TextEditor />} />
               <Route path="photos/*" element={<Photos />} />
+              <Route path="reader/*" element={<Reader />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Dock />

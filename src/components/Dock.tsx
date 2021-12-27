@@ -3,6 +3,7 @@ import {
   DocumentTextIcon,
   // CameraIcon,
   PhotographIcon,
+  NewspaperIcon,
 } from '@heroicons/react/solid'
 
 const applications = [
@@ -21,6 +22,11 @@ const applications = [
     name: 'Photos',
     path: '/photos',
     Icon: PhotographIcon,
+  },
+  {
+    name: 'Reader',
+    path: '/reader',
+    Icon: NewspaperIcon,
   },
 ]
 
